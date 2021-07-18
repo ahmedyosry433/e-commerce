@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body%}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        {% for alls in all %}
+        <div class="col-md-3 mt-3">
+            <div class="card" ">
+                <img src="{{alls.img.url}}" class="card-img-top" alt="..." style="width: 304px; height:305px;">
+                <div class="card-body">
+                  <h5 class="card-title">{{alls.name}}</h5>
+                  <p class="card-text">{{alls.description|truncatechars:100}}</p>
+                  <a href="{%url 'Product:details' alls.id %}" class="btn btn-primary">Add To Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+       
+            
+    </div>
+</div>
+
+{% endblock body %}
