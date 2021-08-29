@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-
+from django.template.defaultfilters import slugify
 # Create your models here.
 
 
@@ -18,12 +18,20 @@ class Category(models.Model):
 class Product(models.Model):
     name=models.CharField(max_length=30, verbose_name='اسم المنتج')
     description=models.TextField(max_length=500, verbose_name ='وصف المنتج')
-    img = models.ImageField(upload_to='product', verbose_name ='صوره المنتج')
+    img = models.ImageField(upload_to='product', blank=True, null=True , verbose_name ='صوره المنتج')
     price=models.FloatField( verbose_name ='سعر المنتج')
     cost=models.FloatField( verbose_name ='سعر تكلفه المنتج')
     created = models.DateTimeField(auto_now=True)
     category= models.ForeignKey(Category, on_delete=CASCADE , verbose_name ='نوع المنتج')
+    discountprice=models.FloatField( verbose_name ='الخصم علي المنتج')
+    is_new =models.BooleanField(default=True  , verbose_name ='هل المنتج جديد ؟')
+    is_bestseller =models.BooleanField(default=True , verbose_name ='هل المنتج احسن مبيعات ؟')
+    slug= models.SlugField(max_length=100,  null=True, blank=True)
+
     
+    def save(self, *args, **kwargs):
+        self.slug= slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
     
     def __str__ (self):
         return self.name
