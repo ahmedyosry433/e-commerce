@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.template.defaultfilters import slugify
@@ -32,9 +33,15 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.slug= slugify(self.name)
         super(Product, self).save(*args, **kwargs)
+        
+        
+    def get_absolute_url(self):
+        return reverse("Product:details", kwargs={"slug": self.slug})
+    
     
     def __str__ (self):
         return self.name
+    
 
 
 class Product_Alternative(models.Model):

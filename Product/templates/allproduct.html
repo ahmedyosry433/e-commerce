@@ -239,7 +239,7 @@
                     <span class="badge red" style="font-size: 11px;">Bestseller</span>
                     {% endif %}                 
                   </p>
-                  <a href=" {% url 'Product:details' alls.slug %}" class="dark-grey-text" style="font-size: 23px;">{{alls.name}}                      
+                  <a href=" {{ alls.get_absolute_url }}" class="dark-grey-text" style="font-size: 23px;">{{alls.name}}                      
                   </a>
                 </strong>
               </h5>
