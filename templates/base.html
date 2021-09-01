@@ -94,15 +94,15 @@
             </a>
           </li>
           {% if user.is_authenticated  %}
-          <li class="nav-item mr-3">
-            <a href="#" class="nav-link border border-light rounded waves-effect"
+          <li class="nav-item mr-2">
+            <a href=" {% url 'accounts:profile'  %} " class="nav-link border border-light rounded waves-effect"
               >
               <i class="fas fa-user "></i>{{user.username}}
             </a>
           </li>
           <li class="nav-item">
             <a href="{% url 'logout' %}" class="nav-link border border-light rounded waves-effect">
-              <i class="fas fa-sign-out-alt "></i>Logout
+              <i class="fas fa-sign-out-alt "></i>
             </a>
           </li>
           {% else %}
